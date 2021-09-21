@@ -1,0 +1,7 @@
+.question-bubble{
+    border-radius:5px;
+    text-align:left;
+    margin:10px;
+    width:max-content;
+    background-color:aqua;
+}
