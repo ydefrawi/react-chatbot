@@ -51,7 +51,7 @@ function ChatForm() {
 		},
 		7: {
 			questionNumber: 7,
-			question: 'Thank you for submitting!',
+			question: 'Thank you for your time!',
 			questionType: 'end-prompt'
 		}
 	};
@@ -59,7 +59,7 @@ function ChatForm() {
 	function formEnd() {
 		return (
 			<div>
-				<h1>Thank you for submitting!</h1>
+				<p>Your interview has been scheduled!</p>
 			</div>
 		);
 	}

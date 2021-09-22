@@ -17,6 +17,7 @@ code {
   height:100vh;
   display:flex;
   justify-content: flex-end;
+  background-image: url(https://connect.talemetry.com/system/production/assets/273461/original/clean-harbors-landing-page-bg--desktop.jpg)
 }
 
 .chat-container{
@@ -38,5 +39,9 @@ code {
 .chat-screen{
   height:48vh;
   width:38vh;
-  background-color: rgb(209, 175, 175);
+  background:linear-gradient(to left bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.15)), rgb(106, 111, 115);
 }
+
+input{
+  border-radius:5px;
+} 

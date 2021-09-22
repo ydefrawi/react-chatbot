@@ -13,9 +13,9 @@ function Answer({ questionType, question, handleAnswer, handleInput, toNextQuest
 
 	function yesNo() {
 		return (
-			<div>
+			<div className="button-container">
 				<button
-					className="answer-bubble"
+					className="btn-danger"
 					question={question}
 					name={question}
 					value={'Yes'}
@@ -24,7 +24,7 @@ function Answer({ questionType, question, handleAnswer, handleInput, toNextQuest
 					Yes
 				</button>
 				<button
-					className="answer-bubble"
+					className="btn-danger"
 					question={question}
 					name={question}
 					value={'No'}
@@ -41,7 +41,7 @@ function Answer({ questionType, question, handleAnswer, handleInput, toNextQuest
 			<div>
 				<form onChange={handleInput} onSubmit={toNextQuestion}>
 					<input type="text" data-question={question} name={question} placeholder="something"  />
-					<button >Submit</button>
+					<button className="btn btn-primary btn-sm">Submit</button>
 				</form>
 			</div>
 		);
@@ -51,7 +51,7 @@ function Answer({ questionType, question, handleAnswer, handleInput, toNextQuest
 		return (
 			<div>
 				<form onChange={handleInput} onSubmit={handleAnswer}>
-					<button>Upload Photo</button>
+					<button className="btn btn-primary">Upload Photo</button>
 				</form>
 			</div>
 		);
@@ -62,7 +62,7 @@ function Answer({ questionType, question, handleAnswer, handleInput, toNextQuest
 			<div>
 				<form>
 					<p>{question}</p> 
-					<button onClick={handleAnswer}>Continue</button>
+					<button className="btn btn-danger" onClick={handleAnswer}>Continue</button>
 				</form>
 			</div>
 		);
@@ -73,7 +73,7 @@ function Answer({ questionType, question, handleAnswer, handleInput, toNextQuest
 			<div>
 				<form>
 					<p>Auto Response</p> 
-					<button>Continue</button>
+					<button onClick={handleAnswer}>Continue</button>
 				</form>
 			</div>
 		);
@@ -82,7 +82,7 @@ function Answer({ questionType, question, handleAnswer, handleInput, toNextQuest
 	function endPrompt() {
 		return (
 			<div>
-				<p> Thank you for submitting! Our people will get back to you in 3-5 business days</p>
+				<button className="btn btn-danger">End Form</button>
 			</div>
 		);
 	}

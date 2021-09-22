@@ -1,7 +1,30 @@
-.question-bubble{
+.speech-bubble{
+    display: flex;
+    align-items: center;
     border-radius:5px;
     text-align:left;
     margin:10px;
-    width:max-content;
-    background-color:aqua;
+    width:15em;
+    background-color:#ffffff;
+    margin-bottom:20px;
+    position:relative;
+}
+
+.sb1:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 8px solid #ffffff;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #ffffff;
+    border-bottom: 8px solid transparent;
+    left: 5px;
+    bottom: -16px;
+  }
+
+.question-prompt{
+    color:#000000;
+    font-weight:bold;
+    padding:5px;
 }

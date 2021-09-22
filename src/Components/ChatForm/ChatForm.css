@@ -69,7 +69,7 @@
   p.from-them {
     align-items: flex-start;
     background-color: #e5e5ea;
-    color: #000;
+    color: rgb(255, 255, 255);
   }
   
   p.from-them:before {
