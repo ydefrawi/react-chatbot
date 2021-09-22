@@ -30,13 +30,13 @@ code {
   border-radius:10px;
   height:50vh;
   width:40vh;
-  background-color: darkgrey;
+  background-color: rgb(0, 0, 0);
   justify-content: center;
   align-items: center;
-}
+}   
 
 .chat-screen{
   height:48vh;
   width:38vh;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(209, 175, 175);
 }
