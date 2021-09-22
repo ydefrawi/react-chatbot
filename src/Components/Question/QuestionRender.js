@@ -1,10 +1,10 @@
 import React from 'react';
 import './QuestionRender.css'
 
-function QuestionRender(props) {
+function QuestionRender({text}) {
 	return (    
-    <div className="question-bubble">
-    {props.text}
+    <div className="from-them margin-b_one margin-t_one">
+    {text}
     </div>
     )
 
