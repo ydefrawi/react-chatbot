@@ -6,17 +6,8 @@ import './ChatForm.css';
 function ChatForm() {
 	const [ answers, setAnswers ] = useState([]);
 	let [ index, setIndex ] = useState(1);
-	// const [ history, setHistory ] = useState([
+	const [ history, setHistory ] = useState([])
 		
-	// 	{
-	// 		question:value,
-	// 		answer:value
-	// 	},
-	// 	{
-	// 		question:value,
-	// 		answer:value,
-	// 	}
-	// 	]);
 
 	const questions = {
 		1: {
@@ -59,7 +50,7 @@ function ChatForm() {
 	function formEnd() {
 		return (
 			<div>
-				<p>Your interview has been scheduled!</p>
+				<p>FORM END</p>
 			</div>
 		);
 	}
@@ -67,13 +58,13 @@ function ChatForm() {
 	const handleAnswer = (event) => {
 		event.preventDefault();
 		const { name, value } = event.target;
-		console.log(index);
-		console.log(questions[index].questionType);
+		// console.log(index);
+		// console.log(questions[index].questionType);
+
 		setAnswers({ ...answers, [questions[index].question]: value });
-		// setHistory(history.push(...answers));
-
+		// setHistory(history=>[...history, ...answers]);
+ 
 		//TODO: Change these to switch case
-
 		// Do you have a valid drivers license. Routes to appropriate question
 		console.log('value', value);
 		if (index === 3 && value === 'Yes') {
@@ -123,12 +114,16 @@ function ChatForm() {
 		<div className="chat-container">
 			<div className="chat-wrapper">
 				<div className="chat-screen">
-					{/* {history.map((item)=>
+
+
+					{history?.map((item)=>
 						<div>
 						<QuestionRender text={item} />
 						<Answer/>
 						</div>
-					)} */}
+					)}
+
+
 					<QuestionRender text={questions[index].question} handleAnswer={handleAnswer} />
 					<Answer
 						questionNumber={questions[index].question}
