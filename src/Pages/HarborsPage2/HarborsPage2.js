@@ -1,11 +1,11 @@
 import React from 'react';
-import FormWithSummary from '../../Components/FormWithSummary/FormWithSummary';
+import ChatFormRedo from '../../Components/ChatFormRedo/ChatFormRedo';
 
 
 function SimpleChatbot() {
 	return (
 		<div>
-			<FormWithSummary />
+			<ChatFormRedo />
 		</div>
 	);
 }

@@ -8,7 +8,7 @@ function SimpleForm() {
 				steps={[
 					{
 						id: 'q-name',
-						message: "Hey! What's your name?",
+						message: "Hello! What's your name?",
 						trigger: 'a-name'
 					},
 					{
@@ -40,7 +40,7 @@ function SimpleForm() {
 					},
 					{
 						id: 'yes-employed',
-						message: 'Hell yeah.',
+						message: 'Excellent!',
 						trigger:"q-code"
 					},
 					{
