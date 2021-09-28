@@ -7,10 +7,10 @@ function Home() {
 		<div className="home2">
         <container className="container">
             <a href="/customform">
-				<button className="btn btn-primary">Basic Chat</button>
+				<button className="btn btn-primary">SimpleChat Basic Chat</button>
 			</a>
 			<a href="/chatsummary">
-				<button className="btn btn-primary">Chat With Summary</button>
+				<button className="btn btn-primary">SimpleChat With Summary</button>
 			</a>
 			<a href="/firsttry">
 				<button className="btn btn-primary">Ground-up First Try</button>

@@ -13,7 +13,7 @@ function App() {
         <div className="App">
       <header>
       </header>
-      <Route exact path={["/", "/home"]} component={Home}/>
+      <Route exact path={["/", "/home","/react-chatbot"]} component={Home}/>
       <Route exact path={["/chatsummary"]} component={SimpleChatbot}/>
       <Route exact path={["/firsttry"]} component={FirstTry}/>
       <Route exact path={["/customform"]} component={HarborsPage}/>
