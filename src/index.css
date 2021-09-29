@@ -45,3 +45,12 @@ code {
 input{
   border-radius:5px;
 } 
+
+
+.chat-card{
+  width: 250px;
+  height: 50vh;
+  background-color:rgb(255, 255, 255);
+  border-color: black;
+  border-width: 2px;
+}

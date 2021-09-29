@@ -1,10 +1,15 @@
 import React from 'react';
 import './ChatBox.css';
+import NewQuestion from '../NewMessage/NewMessage'
 
 function ChatBox() {
 	return (
-		<div className="container">
-			<div className="card chat-card">This is a card</div>
+		<div className="d-flex container">
+			<div id="chat-box" className="card chat-card">
+
+				<NewQuestion/>
+			
+			</div>
 		</div>
 	);
 }

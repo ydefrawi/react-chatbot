@@ -1,0 +1,8 @@
+.p-speech-bubble{
+    justify-self: flex-end;
+    width:fit-content;
+    margin:5px;
+    padding:5px;
+    background-color:rgb(133, 228, 157);
+    border-radius:5px;
+}

@@ -1,0 +1,7 @@
+.q-speech-bubble{
+    width:fit-content;
+    margin:5px;
+    padding:5px;
+    background-color:rgb(209, 133, 228);
+    border-radius:5px;
+}
