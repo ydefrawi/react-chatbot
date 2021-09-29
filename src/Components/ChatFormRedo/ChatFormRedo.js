@@ -44,19 +44,22 @@ function ChatFormRedo() {
     const promptData = findQuestion(active);
 
 
-    const handleChange = (event) => {
-        event.preventDefault();
-        setValue(event.target.value);
-    }
+    // const handleChange = (event) => {
+    //     event.preventDefault();
+    //     setValue(event.target.value);
+    // }
 
     const handleSubmit = (event) => {
     // Store the history with the question details
     // to go through later
         event.preventDefault();
+		const fd = new FormData(event.target);
+
+
         setHistory([...history,
             {
                 ...promptData,
-                value:value
+                value: fd.get('answer')
             }
     ]);
     //check if there's a next question
@@ -84,7 +87,7 @@ function ChatFormRedo() {
 					
 
                     <form className="chat-form" onSubmit={handleSubmit}>
-                        <input className="chat-input" name="answer" onChange={handleChange}/>
+                        <input className="chat-input" name="answer"/>
                         <button className="btn btn-primary submit-btn" type="submit" >Submit</button>
                     </form>
                    
