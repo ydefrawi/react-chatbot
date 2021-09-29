@@ -19,13 +19,9 @@ function SimpleForm() {
 					{
 						id: 'name-response',
 						message: "Hi {previousValue}!",
-						trigger: 'filler'
-					},
-					{
-						id: 'filler',
-						message: 'Just a moment...',
 						trigger: 'q-employed'
 					},
+
 					{
 						id: 'q-employed',
 						message: 'Are you currently employed?',

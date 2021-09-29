@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import reactDom from 'react-dom';
 import NewMessage from '../NewMessage/NewMessage'
-import NewPrompt from '../NewPrompt/NewPrompt';
 
 const prompts = [
 	{
@@ -36,34 +34,30 @@ const prompts = [
 ];
 
 function ChatFormRedo() {
-	const [ steps, setSteps ] = useState(prompts);
-	const [ history, setHistory ] = useState([]);
-	const [ step, setStep ] = useState();
+	// const [ steps, setSteps ] = useState(prompts);
+	const [ history, setHistory ] = useState([prompts[0], prompts[1]]);
+	// const [ step, setStep ] = useState();
     const [answers, setAnswers ] = useState([])
-	// const [ summary, setSummary ] = useState({
-	//     name: '',
-	//     likesToCode: ''
-	// });
+    const [value, setValue ] = useState("")
 
-	// const renderMessage = (msg) => {
-	// 	return <NewMessage message={msg} />;
-	// };
-
-	// const renderPrompt = (msg) => {
-	// 	const prompt = <NewPrompt message={msg} />;
-	// 	return <div>{prompt}</div>;
-	// };
 
     
-	useEffect(() => {
-        setHistory(prompts[0]);
-	}, []);
+	// useEffect(() => {
+        
+	// }, []);
 
+    const handleChange = (event) => {
+        event.preventDefault();
+        setValue(event.target.value);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setAnswers(event.target.value);
+        setAnswers(value);
+        console.log("answers")
+        console.log(answers)
     }
+
 
 	return (
 		<div>
@@ -71,10 +65,16 @@ function ChatFormRedo() {
 				<div id="chat-box" className="card chat-card">
                 
                 {/* to be mapped over */}
-					<NewMessage history={history}/>
-                    <form onSubmit={handleSubmit}>
-                        <input type="text" />
-                        <button className="btn btn-primary" type="Submit">Submit</button>
+
+                {history?.map((item)=>
+                    <NewMessage history={item}/>
+                )}
+					
+
+
+                    <form className="chat-form" onSubmit={handleSubmit}>
+                        <input className="chat-input" name="answer" onChange={handleChange}/>
+                        <button className="btn btn-primary submit-btn" type="submit" >Submit</button>
                     </form>
                    
 				</div>
