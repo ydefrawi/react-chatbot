@@ -1,12 +1,35 @@
 import React from 'react';
 import './NewMessage.css';
 
+
+
 function NewMessage({ history }) {
+console.log("history", history)
+
+    function questionLogic(){
+		if(!history.user){
+            return (
+                <div className="q-speech-bubble">
+                  {history.message}
+                </div>
+            )
+        }   
+        if(history.options){
+            return (
+                <div className="p-options">
+                  <button className="btn btn-primary">One</button>
+                </div>
+            )
+        }
+
+		}
+
+
+
 	return (
-    <div className="q-speech-bubble">
-    {console.log("history",history)}
-    {!history.user && history.message}
-    </div>
+
+    <span> {questionLogic()}</span>
+   
     );
 }
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import NewMessage from '../NewMessage/NewMessage'
 
+const findQuestion = (id) => prompts.find((item) => item.id === id);
+
 const prompts = [
 	{
 		id: 'q-name',
@@ -35,11 +37,12 @@ const prompts = [
 
 function ChatFormRedo() {
 	// const [ steps, setSteps ] = useState(prompts);
-	const [ history, setHistory ] = useState([prompts[0], prompts[1]]);
+	const [ history, setHistory ] = useState([prompts[0]]);
 	// const [ step, setStep ] = useState();
-    const [answers, setAnswers ] = useState([])
+    const [active, setActive ] = useState(prompts[1].id)
     const [value, setValue ] = useState("")
 
+    const promptData = findQuestion(active);
 
     
 	// useEffect(() => {
@@ -52,10 +55,25 @@ function ChatFormRedo() {
     }
 
     const handleSubmit = (event) => {
+    // Store the history with the question details
+    // to go through later
         event.preventDefault();
-        setAnswers(value);
-        console.log("answers")
-        console.log(answers)
+        setHistory([...history,
+            {
+                ...promptData,
+                value:value
+            }
+    ]);
+        if (promptData.next) {
+            setActive(
+                promptData.next
+                );
+          }
+    
+          setValue("");
+
+        console.log("active")
+        console.log(active)
     }
 
 
@@ -65,9 +83,8 @@ function ChatFormRedo() {
 				<div id="chat-box" className="card chat-card">
                 
                 {/* to be mapped over */}
-
                 {history?.map((item)=>
-                    <NewMessage history={item}/>
+                    <NewMessage key={item.id} history={item}/>
                 )}
 					
 
