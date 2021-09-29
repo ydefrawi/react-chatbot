@@ -36,18 +36,13 @@ const prompts = [
 ];
 
 function ChatFormRedo() {
-	// const [ steps, setSteps ] = useState(prompts);
+    //sets first question to 0. May be causing a prob
 	const [ history, setHistory ] = useState([prompts[0]]);
-	// const [ step, setStep ] = useState();
     const [active, setActive ] = useState(prompts[1].id)
     const [value, setValue ] = useState("")
 
     const promptData = findQuestion(active);
 
-    
-	// useEffect(() => {
-        
-	// }, []);
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -64,6 +59,7 @@ function ChatFormRedo() {
                 value:value
             }
     ]);
+    //check if there's a next question
         if (promptData.next) {
             setActive(
                 promptData.next
@@ -82,12 +78,10 @@ function ChatFormRedo() {
 			<div className="d-flex container">
 				<div id="chat-box" className="card chat-card">
                 
-                {/* to be mapped over */}
                 {history?.map((item)=>
                     <NewMessage key={item.id} history={item}/>
                 )}
 					
-
 
                     <form className="chat-form" onSubmit={handleSubmit}>
                         <input className="chat-input" name="answer" onChange={handleChange}/>
