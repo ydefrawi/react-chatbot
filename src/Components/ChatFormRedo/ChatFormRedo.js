@@ -7,29 +7,36 @@ const prompts = [
 	{
 		id: 'q-name',
 		message: "Hello There! What's your name?",
-		next: 'a-name'
+		next: 'a-name',
+		type:"message"
 	},
 	{
 		id: 'a-name',
+		type:"user-input",
 		user: true,
-		next: 'q-code'
+		next: 'q-code',
 	},
 	{
 		id: 'q-code',
+		type:"message",
 		message: 'Do you like to code?',
-		next: 'a-code'
+		next: 'a-code',
 	},
 	{
 		id: 'a-code',
+		type:"choice",
 		options: [ { value: 'y', label: 'Yes', next: 'y-code' }, { value: 'n', label: 'No', next: 'n-code' } ]
+
 	},
 	{
 		id: 'y-code',
+		type:"end",
 		message: "That's awesome!",
 		end: true
 	},
 	{
 		id: 'n-code',
+		type:"end",
 		message: 'You should learn to!',
 		end: true
 	}
@@ -37,17 +44,10 @@ const prompts = [
 
 function ChatFormRedo() {
     //sets first question to 0. May be causing a prob
-	const [ history, setHistory ] = useState([prompts[0]]);
+	const [history, setHistory ] = useState([prompts[0]]);
     const [active, setActive ] = useState(prompts[1].id)
-    const [value, setValue ] = useState("")
 
     const promptData = findQuestion(active);
-
-
-    // const handleChange = (event) => {
-    //     event.preventDefault();
-    //     setValue(event.target.value);
-    // }
 
     const handleSubmit = (event) => {
     // Store the history with the question details
@@ -55,13 +55,24 @@ function ChatFormRedo() {
         event.preventDefault();
 		const fd = new FormData(event.target);
 
-
-        setHistory([...history,
-            {
-                ...promptData,
-                value: fd.get('answer')
-            }
-    ]);
+		if(history===prompt[0]){
+			setHistory([
+				{
+					...promptData,
+					value: fd.get('answer')
+				}
+			]);
+		} else {
+			
+			setHistory([
+				...history,
+				{
+					...promptData,
+					value: fd.get('answer')
+				}
+			]);
+		}
+       
     //check if there's a next question
         if (promptData.next) {
             setActive(
@@ -69,20 +80,19 @@ function ChatFormRedo() {
                 );
           }
     
-          setValue("");
+        //   setValue("");
 
         console.log("active")
         console.log(active)
     }
-
 
 	return (
 		<div>
 			<div className="d-flex container">
 				<div id="chat-box" className="card chat-card">
                 
-                {history?.map((item)=>
-                    <NewMessage key={item.id} history={item}/>
+                {history?.map((prompt)=>
+                    <NewMessage key={prompt.id} prompt={prompt} />
                 )}
 					
 

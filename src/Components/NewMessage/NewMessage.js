@@ -1,30 +1,31 @@
 import React from 'react';
+import { isCompositeComponentWithType } from 'react-dom/test-utils';
 import './NewMessage.css';
 
 
 
-function NewMessage({ history }) {
-console.log("history", history)
+function NewMessage({prompt}) {
+console.log("prompt", prompt)
+
 
     function questionLogic(){
-		if(!history.user){
+
+		if(!prompt.user){
             return (
                 <div className="q-speech-bubble">
-                  {history.message}
+                  {prompt.message}
                 </div>
             )
         }   
-        if(history.options){
+        if(prompt.options){
+            console.log("Button Here?")
             return (
                 <div className="p-options">
                   <button className="btn btn-primary">One</button>
                 </div>
             )
         }
-
 		}
-
-
 
 	return (
 
