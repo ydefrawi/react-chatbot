@@ -79,8 +79,6 @@ function ChatFormRedo() {
                 promptData.next
                 );
           }
-    
-        //   setValue("");
 
         console.log("active")
         console.log(active)
