@@ -3,13 +3,15 @@ import QuestionRender from '../Question/QuestionRender';
 import Answer from '../Answer/Answer';
 import './ChatForm.css';
 
+
+
 function ChatForm() {
 	const [ answers, setAnswers ] = useState([]);
 	let [ index, setIndex ] = useState(1);
 	const [ history, setHistory ] = useState([])
 		
 
-	const questions = {
+	const questions  = {
 		1: {
 			questionNumber: 1,
 			question: 'Hello! Looking for employment?',

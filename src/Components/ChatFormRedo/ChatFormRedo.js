@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import NewMessage from '../NewMessage/NewMessage'
 
-const findQuestion = (id) => prompts.find((item) => item.id === id);
 
 const prompts = [
 	{
 		id: 'q-name',
+		type:"message",
+		first: true,
 		message: "Hello There! What's your name?",
 		next: 'a-name',
-		type:"message"
 	},
 	{
 		id: 'a-name',
 		type:"user-input",
 		user: true,
 		next: 'q-code',
+		
 	},
 	{
 		id: 'q-code',
@@ -30,31 +31,51 @@ const prompts = [
 	},
 	{
 		id: 'y-code',
-		type:"end",
+		type:"last",
 		message: "That's awesome!",
-		end: true
+		
 	},
 	{
 		id: 'n-code',
-		type:"end",
+		type:"last",
 		message: 'You should learn to!',
-		end: true
+		// last: true
+	},
+	{ 
+		id: 'end-form',
+		type:"end",
+		message: "Thank you for your time!",
+		// last: true
 	}
 ];
 
+console.log(prompts)
+
+
+// finds the question in prompts[] with a specific id
+const activeQuestion = (id) => prompts.find((prompt) => prompt.id === id);
+
 function ChatFormRedo() {
-    //sets first question to 0. May be causing a prob
+
+    // sets first question to prompts[0]
+	const [index, setIndex] = useState(0);
 	const [history, setHistory ] = useState([prompts[0]]);
+	// sets the 'active' question. 
     const [active, setActive ] = useState(prompts[1].id)
 
-    const promptData = findQuestion(active);
+useEffect(() => {
+		console.log("active", active)
+}, [])
+
+
+    const promptData = activeQuestion(active);
 
     const handleSubmit = (event) => {
-    // Store the history with the question details
-    // to go through later
-        event.preventDefault();
+		event.preventDefault();
+		console.log(active)
 		const fd = new FormData(event.target);
-
+		
+		// Store the history with the question details to map through later. If it's the first prompt, overwrite history.
 		if(history===prompt[0]){
 			setHistory([
 				{
@@ -63,7 +84,6 @@ function ChatFormRedo() {
 				}
 			]);
 		} else {
-			
 			setHistory([
 				...history,
 				{
@@ -73,15 +93,23 @@ function ChatFormRedo() {
 			]);
 		}
        
-    //check if there's a next question
-        if (promptData.next) {
-            setActive(
-                promptData.next
-                );
-          }
+    //checks if there's a next question trigger. If so, sets Active in state to the correct prompt
+	//TODO have it move to the prompt with the matching 'next' trigger when the prompt has options[] based on the user's selection
 
-        console.log("active")
-        console.log(active)
+	//TODO if the active prompt ends the form, (last=true), move to the final prompt
+
+
+        if (promptData.next) {
+            setActive(promptData.next);
+          } else if (promptData.type==='choice'){
+			setActive("terminate")
+		  } else if (promptData.type==='last'){
+			setActive("terminate")
+		  } else if (promptData.type==='end') {
+			setActive("end-form")
+		  }
+
+       
     }
 
 	return (
