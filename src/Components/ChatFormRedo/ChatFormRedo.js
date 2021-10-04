@@ -14,8 +14,14 @@ const prompts = [
 		id: 'a-name',
 		type:"user-input",
 		user: true,
-		next: 'q-code',
+		next: 'name-response',
 		
+	},
+	{
+		id: 'name-response',
+		type:"message",
+		message: "Hello {previousValue}!",
+		next: 'a-name',
 	},
 	{
 		id: 'q-code',
@@ -62,6 +68,7 @@ function ChatFormRedo() {
 	const [history, setHistory ] = useState([prompts[0]]);
 	// sets the 'active' question. 
     const [active, setActive ] = useState(prompts[1].id)
+    const [previousVal, setPreviousVal] = useState("")
 
 useEffect(() => {
 		console.log("active", active)
@@ -69,6 +76,7 @@ useEffect(() => {
 
 
     const promptData = activeQuestion(active);
+	console.log("promptData", promptData)
 
     const handleSubmit = (event) => {
 		event.preventDefault();
@@ -90,24 +98,27 @@ useEffect(() => {
 					...promptData,
 					value: fd.get('answer')
 				}
-			]);
+			])
+			setPreviousVal(fd.get('answer'))
 		}
        
     //checks if there's a next question trigger. If so, sets Active in state to the correct prompt
 	//TODO have it move to the prompt with the matching 'next' trigger when the prompt has options[] based on the user's selection
-
 	//TODO if the active prompt ends the form, (last=true), move to the final prompt
 
 
         if (promptData.next) {
             setActive(promptData.next);
-          } else if (promptData.type==='choice'){
-			setActive("terminate")
-		  } else if (promptData.type==='last'){
-			setActive("terminate")
-		  } else if (promptData.type==='end') {
-			setActive("end-form")
-		  }
+          } 
+		//  if (promptData.next&&promptData.type==='user-input'){
+		// 	setActive("user-input")
+        //   } else if (promptData.type==='choice'){
+		// 	setActive("choice")
+		//   } else if (promptData.type==='last'){
+		// 	setActive("last")
+		//   } else if (promptData.type==='end') {
+		// 	setActive("end-form")
+		//   }
 
        
     }
@@ -117,8 +128,8 @@ useEffect(() => {
 			<div className="d-flex container">
 				<div id="chat-box" className="card chat-card">
                 
-                {history?.map((prompt)=>
-                    <NewMessage key={prompt.id} prompt={prompt} />
+                {history.map((prompt)=>
+                    <NewMessage key={prompt.id} prompt={prompt} previousVal={previousVal} handleSubmit={handleSubmit} />
                 )}
 					
 
