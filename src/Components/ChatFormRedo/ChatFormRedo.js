@@ -20,8 +20,8 @@ const prompts = [
 	{
 		id: 'name-response',
 		type:"message",
-		message: "Hello {previousValue}!",
-		next: 'a-name',
+		message: "Hello there!",
+		next: 'q-code',
 	},
 	{
 		id: 'q-code',
@@ -32,7 +32,11 @@ const prompts = [
 	{
 		id: 'a-code',
 		type:"choice",
-		options: [ { value: 'y', label: 'Yes', next: 'y-code' }, { value: 'n', label: 'No', next: 'n-code' } ]
+		options: [ 
+		{ value: 'y', label: 'Yes', next: 'y-code' },
+		{ value: 'n', label: 'No', next: 'n-code' },
+		{ value: 'm', label: 'Maybe', next: 'm-code' } 
+		]
 
 	},
 	{
@@ -47,6 +51,12 @@ const prompts = [
 		message: 'You should learn to!',
 		// last: true
 	},
+	{
+		id: 'm-code',
+		type:"last",
+		message: 'Maybe!? You should really think about it!',
+		// last: true
+	},
 	{ 
 		id: 'end-form',
 		type:"end",
@@ -54,8 +64,6 @@ const prompts = [
 		// last: true
 	}
 ];
-
-console.log(prompts)
 
 
 // finds the question in prompts[] with a specific id
@@ -75,19 +83,19 @@ useEffect(() => {
 }, [])
 
 
-    const promptData = activeQuestion(active);
-	console.log("promptData", promptData)
+    const currentPromptData = activeQuestion(active);
+	console.log("currentPromptData", currentPromptData)
 
     const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log(active)
+		console.log("active", active)
 		const fd = new FormData(event.target);
 		
 		// Store the history with the question details to map through later. If it's the first prompt, overwrite history.
 		if(history===prompt[0]){
 			setHistory([
 				{
-					...promptData,
+					...currentPromptData,
 					value: fd.get('answer')
 				}
 			]);
@@ -95,11 +103,24 @@ useEffect(() => {
 			setHistory([
 				...history,
 				{
-					...promptData,
+					...currentPromptData,
 					value: fd.get('answer')
 				}
 			])
+			console.log(fd)
 			setPreviousVal(fd.get('answer'))
+		}
+
+		const handleChoice = (event) => {
+
+			setHistory([
+				...history,
+				{
+					...currentPromptData,
+					value: fd.get('answer')
+				}
+			])
+
 		}
        
     //checks if there's a next question trigger. If so, sets Active in state to the correct prompt
@@ -107,16 +128,19 @@ useEffect(() => {
 	//TODO if the active prompt ends the form, (last=true), move to the final prompt
 
 
-        if (promptData.next) {
-            setActive(promptData.next);
+        if (currentPromptData.next) {
+            setActive(currentPromptData.next);
+          } else if (currentPromptData.type==="message" && currentPromptData.next) {
+            setActive(currentPromptData.next);
           } 
-		//  if (promptData.next&&promptData.type==='user-input'){
+		//  if (currentPromptData.type==='user-input'){
 		// 	setActive("user-input")
-        //   } else if (promptData.type==='choice'){
+
+        //   } else if (currentPromptData.type==='choice'){
 		// 	setActive("choice")
-		//   } else if (promptData.type==='last'){
+		//   } else if (currentPromptData.type==='last'){
 		// 	setActive("last")
-		//   } else if (promptData.type==='end') {
+		//   } else if (currentPromptData.type==='end') {
 		// 	setActive("end-form")
 		//   }
 
