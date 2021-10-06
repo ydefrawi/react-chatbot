@@ -1,7 +1,7 @@
 import React from 'react';
 import './NewMessage.css';
 
-function NewMessage({ prompt, previousValue, handleSubmit,input,handleChoice }) {
+function NewMessage({ prompt, previousValue, input,handleChoice }) {
 	// console.log('prompt in NewMessage', prompt);
 
 	function questionLogic() {
