@@ -72,7 +72,7 @@ function ChatFormRedo() {
 	// sets the 'active' question's ID.
 	const [ active, setActive ] = useState(prompts[1].id);
 	const [ previousVal, setPreviousVal ] = useState('');
-	// const [ input, setInput ] = useState('');
+	const [ input, setInput ] = useState('');
 
 	useEffect(() => {
 		console.log('active', active);		
@@ -84,6 +84,10 @@ function ChatFormRedo() {
 	const currentPromptData = activeQuestion(active);
 	// console.log('currentPromptData', currentPromptData);
 
+	const handleChange=(event)=>{
+		event.preventDefault();
+		setInput(event.target.value)
+	}
 
 	const handleChoice = (event) => {
 		event.preventDefault();
@@ -160,13 +164,13 @@ function ChatFormRedo() {
 							previousVal={previousVal}
 							handleSubmit={handleSubmit}
 							handleChoice={handleChoice}
-							// input={input}
+							input={input}
 						/>
 					))}
 
 {/* Input/Chat Form. Static. */}
 					<form className="chat-form" onSubmit={handleSubmit}>
-						<input className="chat-input" name="answer"  />
+						<input className="chat-input" name="answer" onChange={handleChange} />
 						<button className="btn btn-primary submit-btn" type="submit">
 							Submit
 						</button>
